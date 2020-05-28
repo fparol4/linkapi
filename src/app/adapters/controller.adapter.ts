@@ -6,7 +6,7 @@ export class ControllerAdapter {
   public static adapt (action: TAction) {
     return (request: Request, response: Response) => {
       const httpResponse: IHttpResponse = action(request)
-      response.status(httpResponse.status).json({
+      return response.status(httpResponse.status).json({
         status: httpResponse.status,
         message: httpResponse.message,
         data: httpResponse.body
