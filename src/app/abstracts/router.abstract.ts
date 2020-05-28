@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 /** Interfaces */
-import { IARouter } from '../interfaces/router.interface'
+import { IARouter } from '../interfaces/router.interfaces'
 
 export abstract class ARouter implements IARouter {
   public readonly router: Router
