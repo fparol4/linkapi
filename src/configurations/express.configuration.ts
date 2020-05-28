@@ -1,3 +1,4 @@
 export const ExpressConfiguration = {
-  port: process.env.PORT || 3000
+  port: Number(process.env.PORT) || 3000,
+  host: process.env.HOST || 'http://localhost'
 }
