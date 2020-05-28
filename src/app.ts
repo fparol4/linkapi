@@ -5,7 +5,7 @@ import Express from 'express'
 import { MainRouter } from './app/routers/main.router'
 
 /** Interfaces */
-import { IARouter } from './app/interfaces/router.interface'
+import { IARouter } from './app/interfaces/router.interfaces'
 
 class App {
   public static routers: IARouter[] = [

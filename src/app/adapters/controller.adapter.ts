@@ -9,7 +9,8 @@ export class ControllerAdapter {
       return response.status(httpResponse.status).json({
         status: httpResponse.status,
         message: httpResponse.message,
-        data: httpResponse.body
+        data: httpResponse.body,
+        errors: httpResponse.errors
       })
     }
   }
