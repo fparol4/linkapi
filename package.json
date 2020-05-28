@@ -18,11 +18,17 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.2",
+    "nodemon": "^2.0.4",
     "ts-jest": "^25.5.1",
+    "ts-node": "^8.10.1",
     "typescript": "^3.9.2"
   },
   "scripts": {
     "test": "jest",
     "test:staged": "jest"
+  },
+  "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "dotenv": "^8.2.0"
   }
 }
