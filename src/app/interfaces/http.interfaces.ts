@@ -4,3 +4,8 @@ export interface IHttpResponse {
   body?: object
   errors?: string[]
 }
+
+export interface IFilters {
+  limit: number
+  page: number
+}
