@@ -11,6 +11,9 @@ import { IARouter } from './app/interfaces/router.interfaces'
 /** Middlewares */
 import { ErrorHandlerMiddleware } from './app/middlewares/error-handler.middleware'
 
+/** Databases */
+import MongoDatabase from './database/mongo.database'
+
 class App {
   public static routers: IARouter[] = [
     new MainRouter()
@@ -20,9 +23,14 @@ class App {
 
   constructor () {
     this.app = Express()
+    this.init()
     this.middlewares()
     this.routers()
     this.handler()
+  }
+
+  private init (): void {
+    MongoDatabase.connect()
   }
 
   private middlewares (): void {}
