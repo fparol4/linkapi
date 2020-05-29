@@ -4,6 +4,7 @@ import Express from 'express'
 
 /** Routers */
 import { MainRouter } from './app/routers/main.router'
+import { DealRouter } from './app/routers/deal.router'
 
 /** Interfaces */
 import { IARouter } from './app/interfaces/router.interfaces'
@@ -16,6 +17,7 @@ import MongoDatabase from './database/mongo.database'
 
 class App {
   public static routers: IARouter[] = [
+    new DealRouter(),
     new MainRouter()
   ]
 
@@ -33,7 +35,9 @@ class App {
     MongoDatabase.connect()
   }
 
-  private middlewares (): void {}
+  private middlewares (): void {
+    this.app.use(Express.json())
+  }
 
   private routers (): void {
     App.routers.forEach(({ basePath, router }) => {
