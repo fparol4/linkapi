@@ -1,5 +1,5 @@
 import { IHttpResponse } from '../interfaces/http.interfaces'
-import HttpHelper from '../helpers/http.helper'
+import { NotFoundError } from '../errors/http.errors'
 
 class MainController {
   public index (): IHttpResponse {
@@ -10,7 +10,7 @@ class MainController {
   }
 
   public notFound (): IHttpResponse {
-    return HttpHelper.notFound()
+    throw new NotFoundError()
   }
 }
 
