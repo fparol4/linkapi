@@ -11,9 +11,7 @@ export class MongoDatabase {
   }
 
   public connect (): void {
-    const { username, password, dbName, port, host } = MongodbConfiguration
-    const mongoUrl = `mongodb://${username}:${password}@${host}:${port}/${dbName}`
-    mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+    mongoose.connect(MongodbConfiguration.mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
   }
 
   private setHooks (): void {
