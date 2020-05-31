@@ -1,7 +1,5 @@
-interface IPipedriveOrg {
-  name: string
-  address: string
-  cc_email: string
+export enum EDealStatus {
+  WON = 'won'
 }
 
 export interface IPipedriveDeal {
@@ -10,5 +8,6 @@ export interface IPipedriveDeal {
   value: number
   currency: string
   won_time: Date
-  org_id: IPipedriveOrg
+  org_name: string
+  status: string
 }

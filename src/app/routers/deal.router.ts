@@ -10,5 +10,6 @@ export class DealRouter extends ARouter {
   public routes (): void {
     this.router.get('/', ControllerAdapter.adapt(DealController.index))
     this.router.post('/', ControllerAdapter.adapt(DealController.store))
+    this.router.delete('/', ControllerAdapter.adapt(DealController.delete))
   }
 }

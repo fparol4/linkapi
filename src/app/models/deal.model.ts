@@ -6,12 +6,9 @@ const DealSchema: Schema = new Schema({
   title: { type: String, required: true },
   value: { type: Number, required: true, min: [0, 'The value cannot be lower than 0'] },
   currency: { type: String, required: true },
-  won_time: { type: Date },
-  org: {
-    name: { type: String, required: true },
-    address: { type: String, required: true },
-    cc_email: { type: String, required: true }
-  }
+  org_name: { type: String, required: true },
+  external_id: { type: String, required: true },
+  won_time: { type: Date }
 },
 { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } })
 
