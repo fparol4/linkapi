@@ -4,6 +4,7 @@ import { IPipedriveDeal, EDealStatus } from '../interfaces/pipedrive.interfaces'
 import { IMDeal } from '../interfaces/deal.interfaces'
 import { DealModel } from '../models/deal.model'
 import { PaginateResult } from 'mongoose'
+import { blingService } from '../services/bling.service'
 
 class DealController {
   public async index (request: Request): Promise<IHttpResponse> {
@@ -40,6 +41,18 @@ class DealController {
         message: 'Updated deal still not won'
       }
     }
+
+    await blingService.sendDeal({
+      cliente: {
+        nome: current.org_name
+      },
+      item: {
+        codigo: current.id,
+        descricao: current.title,
+        vlr_unit: current.value,
+        currency: current.currency
+      }
+    })
 
     const deal: IMDeal = await DealModel.create({
       title: current.title,
