@@ -3,7 +3,14 @@ import ValidatorHelper from '../helpers/validator.helper'
 
 class DealValidator {
   public async index (request: Request, response: Response, next: NextFunction): Promise<void> {
-    const validatedQuery = await ValidatorHelper.validateQuery(request.query)
+    const { validator } = ValidatorHelper
+
+    const querySchema = {
+      title: validator.string().default(''),
+      value: validator.number().default(0).min(0)
+    }
+
+    const validatedQuery = await ValidatorHelper.validateQuery(request.query, querySchema)
     request.query = validatedQuery
     return next()
   }

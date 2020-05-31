@@ -8,10 +8,15 @@ import { blingService } from '../services/bling.service'
 
 class DealController {
   public async index (request: Request): Promise<IHttpResponse> {
-    const { query: { limit, page } } = request
+    const { query: { limit, page, title, value } } = request
 
     const deals: PaginateResult<IMDeal> = await DealModel
-      .paginate({}, { page: Number(page), limit: Number(limit) })
+      .paginate(
+        {
+          title: new RegExp(String(title), 'i'),
+          value: { $gt: value }
+        },
+        { page: Number(page), limit: Number(limit) })
 
     return {
       status: 200,
