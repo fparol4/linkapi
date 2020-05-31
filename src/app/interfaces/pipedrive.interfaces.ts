@@ -1,5 +1,7 @@
 export enum EDealStatus {
-  WON = 'won'
+  LOST = 'lost',
+  WON = 'won',
+  OPEN = 'open'
 }
 
 export interface IPipedriveDeal {
