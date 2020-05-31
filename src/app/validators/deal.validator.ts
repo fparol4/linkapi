@@ -17,10 +17,10 @@ class DealValidator {
         value: validator.number().min(0).defined(),
         currency: validator.string().min(3).defined(),
         org_name: validator.string().min(3).defined(),
-        won_time: validator.string().nullable(),
+        won_time: validator.date().default(() => new Date()).nullable(),
         status: validator.string().oneOf(['won', 'lost', 'open']).defined()
       })
-    })
+    }).defined()
 
     request.body = await ValidatorHelper.validate(bodySchema, request.body)
     return next()
