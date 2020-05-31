@@ -20,6 +20,25 @@ class DealController {
     }
   }
 
+  public async aggregated (request: Request): Promise<IHttpResponse> {
+    const deals: IMDeal[] = await DealModel.aggregate(
+      [
+        {
+          $group: {
+            _id: { $dateToString: { format: '%Y-%m-%d', date: '$created_at' } },
+            total: { $sum: '$value' }
+          }
+        }
+      ]
+    )
+
+    return {
+      status: 200,
+      message: 'All deals found successfully',
+      body: deals
+    }
+  }
+
   public async store (request: Request): Promise<IHttpResponse> {
     const { body: { current } }: { body: { current: IPipedriveDeal } } = request
 
