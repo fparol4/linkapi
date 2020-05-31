@@ -8,13 +8,10 @@ import { blingService } from '../services/bling.service'
 
 class DealController {
   public async index (request: Request): Promise<IHttpResponse> {
-    const { query: { page = 1, limit = 10 } } = request
-
-    const fixedPage = page > 0 ? Number(page) : 1
-    const fixedLimit = limit > 0 ? Number(limit) : 10
+    const { query: { limit, page } } = request
 
     const deals: PaginateResult<IMDeal> = await DealModel
-      .paginate({}, { page: fixedPage, limit: fixedLimit })
+      .paginate({}, { page: Number(page), limit: Number(limit) })
 
     return {
       status: 200,
@@ -24,7 +21,14 @@ class DealController {
   }
 
   public async store (request: Request): Promise<IHttpResponse> {
-    const { body: { current } }: {body: {current: IPipedriveDeal }} = request
+    const { body: { current } }: { body: { current: IPipedriveDeal } } = request
+
+    if (current.status !== EDealStatus.WON) {
+      return {
+        status: 200,
+        message: 'Updated deal still not won'
+      }
+    }
 
     const existingDeal = await DealModel.findOne({ external_id: current.id })
 
@@ -32,13 +36,6 @@ class DealController {
       return {
         status: 400,
         message: 'An deal with this external_id already exists'
-      }
-    }
-
-    if (current.status !== EDealStatus.WON) {
-      return {
-        status: 200,
-        message: 'Updated deal still not won'
       }
     }
 
