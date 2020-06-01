@@ -3,8 +3,27 @@ import ValidatorHelper from '../helpers/validator.helper'
 
 class DealValidator {
   public async index (request: Request, response: Response, next: NextFunction): Promise<void> {
-    const validatedQuery = await ValidatorHelper.validateQuery(request.query)
+    const { validator } = ValidatorHelper
+
+    const additionalFilters = {
+      title: validator.string().default(''),
+      min_value: validator.number().min(0).default(0)
+    }
+
+    const validatedQuery = await ValidatorHelper.validateFilters(request.query, additionalFilters)
     request.query = validatedQuery
+    return next()
+  }
+
+  public async aggregate (request: Request, response: Response, next: NextFunction): Promise<void> {
+    const { validator } = ValidatorHelper
+
+    const additionalFilters = {
+      min_total: validator.number().min(0).default(0),
+      min_date: validator.string()
+    }
+
+    request.query = await ValidatorHelper.validateFilters(request.query, additionalFilters)
     return next()
   }
 

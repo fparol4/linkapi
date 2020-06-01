@@ -8,10 +8,13 @@ import { blingService } from '../services/bling.service'
 
 class DealController {
   public async index (request: Request): Promise<IHttpResponse> {
-    const { query: { limit, page } } = request
+    const { query: { limit, page, title, min_value } } = request
 
     const deals: PaginateResult<IMDeal> = await DealModel
-      .paginate({}, { page: Number(page), limit: Number(limit) })
+      .paginate({
+        title: new RegExp(String(title), 'i'),
+        value: { $gte: min_value }
+      }, { page: Number(page), limit: Number(limit) })
 
     return {
       status: 200,
@@ -21,12 +24,24 @@ class DealController {
   }
 
   public async aggregated (request: Request): Promise<IHttpResponse> {
+    const { query: { min_total, min_date } } = request
+
     const deals: IMDeal[] = await DealModel.aggregate(
       [
         {
+          $match: {
+            won_time: { $gte: new Date(String(min_date)) }
+          }
+        },
+        {
           $group: {
-            _id: { $dateToString: { format: '%Y-%m-%d', date: '$created_at' } },
+            _id: { $dateToString: { format: '%Y-%m-%d', date: '$won_time' } },
             total: { $sum: '$value' }
+          }
+        },
+        {
+          $match: {
+            total: { $gte: min_total }
           }
         }
       ]
@@ -49,7 +64,7 @@ class DealController {
       }
     }
 
-    const existingDeal = await DealModel.findOne({ external_id: current.id })
+    const existingDeal = await DealModel.count({ external_id: current.id })
 
     if (existingDeal) {
       return {
