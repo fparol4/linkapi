@@ -11,7 +11,6 @@ export class DealRouter extends ARouter {
   public routes (): void {
     this.router.get('/', DealValidator.index, ControllerAdapter.adapt(DealController.index))
     this.router.post('/', DealValidator.store, ControllerAdapter.adapt(DealController.store))
-    this.router.delete('/', ControllerAdapter.adapt(DealController.delete))
     this.router.get('/aggregated', DealValidator.aggregate, ControllerAdapter.adapt(DealController.aggregated))
     this.router.get('/:id', ControllerAdapter.adapt(DealController.show))
   }

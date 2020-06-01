@@ -112,14 +112,6 @@ class DealController {
       body: deal
     }
   }
-
-  public async delete (request: Request): Promise<IHttpResponse> {
-    await DealModel.deleteMany({})
-    return {
-      status: 200,
-      message: 'All deals deleted successfully'
-    }
-  }
 }
 
 export default new DealController()
