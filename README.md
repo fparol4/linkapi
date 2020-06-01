@@ -197,3 +197,8 @@ response: {
 }
 ```
 
+## Todo
+
+- [ ] Dockerfile para automatizar todo o build do projeto.
+- [ ] Testes unitários e de integração em todo o projeto.
+- [ ] Refatorar classe `deal.controller` transferindo algumas responsabilidades para a Model.  
