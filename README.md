@@ -32,7 +32,7 @@
 
 7. Logue-se no **Pipedrive** e busque pelas opções **Tools and Apps** > **Web Hooks** > **Create new Webhook**. 
 
-// imagem
+![XscpglK - Imgur](https://user-images.githubusercontent.com/47286899/83371164-0572fd80-a398-11ea-9b29-9d09a896e96d.png)
 
 Se tudo estiver configurado corretamente, a integração já está online. 
 
