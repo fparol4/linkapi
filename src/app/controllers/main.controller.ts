@@ -5,7 +5,7 @@ class MainController {
   public async index (): Promise<IHttpResponse> {
     return {
       status: 200,
-      message: 'helloworld'
+      message: 'Hello, server running'
     }
   }
 
