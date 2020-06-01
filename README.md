@@ -197,6 +197,3 @@ response: {
 }
 ```
 
-## Todo
-
-- [ ] Mercury
