@@ -23,6 +23,18 @@ class DealController {
     }
   }
 
+  public async show (request: Request): Promise<IHttpResponse> {
+    const { params: { id } } = request
+
+    const deal: IMDeal = await DealModel.findOne({ _id: id })
+
+    return {
+      status: 200,
+      message: 'Deal found successfully',
+      body: deal
+    }
+  }
+
   public async aggregated (request: Request): Promise<IHttpResponse> {
     const { query: { min_total, min_date } } = request
 
