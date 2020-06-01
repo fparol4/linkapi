@@ -25,7 +25,7 @@
   },
   "scripts": {
     "build": "rimraf ./dist && tsc",
-    "start": "node ./dist/src/server.js",
+    "start": "NODE_ENV=PRODUCTION node ./dist/src/server.js",
     "start:dev": "nodemon",
     "test": "jest",
     "test:staged": "jest"
