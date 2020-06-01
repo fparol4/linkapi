@@ -76,7 +76,7 @@ class DealController {
       }
     }
 
-    const existingDeal = await DealModel.count({ external_id: current.id })
+    const existingDeal = await DealModel.countDocuments({ external_id: current.id })
 
     if (existingDeal) {
       return {
